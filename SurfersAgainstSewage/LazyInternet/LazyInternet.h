@@ -6,14 +6,14 @@
 @protocol LazyInternetDelegate;
 
 @interface LazyInternet : NSObject {
-	NSURLConnection *intConnection;
-	id <LazyInternetDelegate> delegate;
-	NSString *unique;
-	CGFloat statusCode;
-	int totalSize;
-	CGFloat progress;
-	NSTimer *timer;
-	NSMutableDictionary *additionalDict;
+    NSURLConnection *intConnection;
+    id <LazyInternetDelegate> delegate;
+    NSString *unique;
+    CGFloat statusCode;
+    long long totalSize;
+    CGFloat progress;
+    NSTimer *timer;
+    NSMutableDictionary *additionalDict;
 }
 
 @property (strong, nonatomic) NSMutableData *activeDownload;
@@ -27,7 +27,6 @@
 
 @protocol LazyInternetDelegate <NSObject>
 
-- (void)lazyInternetDidFailWithError:(NSError *)error;
 - (void)lazyInternetDidLoad:(NSData*)data withUnique:(id)unique;
 - (void)lazyInternetGotSize:(int)totalSize withUnique:(id)unique;
 - (void)lazyInternetProgress:(CGFloat)currentProgress withUnique:(id)unique;

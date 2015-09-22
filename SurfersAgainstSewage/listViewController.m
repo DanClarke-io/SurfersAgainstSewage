@@ -41,12 +41,13 @@
     [super viewDidLoad];
     self.navigationController.interactivePopGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
     [self setTitle:@"UK Beaches"];
-    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     [[self tableView] setSeparatorColor:[UIColor grayColor]];
     [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [[[self navigationController] navigationBar] setBarTintColor:[UIColor colorWithRed:0.072 green:0.241 blue:0.253 alpha:1.000]];
-    [[self navigationItem] setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(updateSpillReports)]];
+    UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(updateSpillReports)];
+    [refreshBtn setTintColor:[UIColor whiteColor]];
+    [[self navigationItem] setRightBarButtonItem:refreshBtn];
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake( 0, 0, 80, 40)];
     [backButton setContentEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];

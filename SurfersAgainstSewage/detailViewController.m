@@ -164,7 +164,7 @@
 -(void)getDirections {
     NSString *Destinationlatlong =[NSString stringWithFormat:@"%@,%@",[ourData objectForKey:@"loc1"],[ourData objectForKey:@"loc2"]];
     NSString *addr = [NSString stringWithFormat:@"https://maps.apple.com/maps?saddr=Current+Location&daddr=%@",Destinationlatlong];
-    addr = [addr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    addr = [addr stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];
     
     NSURL *url = [[NSURL alloc] initWithString:addr];
     if ([[UIApplication sharedApplication]canOpenURL:url]) { [[UIApplication sharedApplication] openURL:url]; }
@@ -173,9 +173,15 @@
 
 
 -(void)getShare {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Surfers Against Sewage" message:@"Share currently not enabled." delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
-    [alert show];
-
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Surfers Against Sewage"
+                                                                   message:@"Share currently not enabled."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault
+                                                          handler:nil];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:true completion:nil];
 }
 
 -(CGFloat)updateScrollHeight:(UIView *)view { return view.frame.size.height+view.frame.origin.y+20; }

@@ -153,6 +153,15 @@
         UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"No Sewage alerts" message:@"Currently, SAS are not aware of any sewage alerts in the UK." delegate:self cancelButtonTitle:@"Close" otherButtonTitles:@"Report sewage spill", nil];
         [al setDelegate:self];
         [al show];
+        //UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Surfers Against Sewage"
+        //                                                               message:@"Share currently not enabled."
+        //                                                        preferredStyle:UIAlertControllerStyleAlert];
+        
+        //UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault
+        //                                                      handler:nil];
+        
+        //[alert addAction:defaultAction];
+        //[self presentViewController:alert animated:true completion:nil];
     }
 }
 
@@ -222,10 +231,18 @@
     //NSLog(@"Loading %f",currentProgress);
 }
 - (void)lazyInternetDidFailWithError:(NSError *)error withUnique:(id)unique {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Surfers Against Sewage" message:@"Sorry, but we are unable to download the latest data to your device, please try again later." delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Surfers Against Sewage"
+                                                                   message:@"Sorry, but we are unable to download the latest data to your device, please try again later."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault
+                                                          handler:nil];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:true completion:nil];
+    
     [topLabel setText:@"Failed to download"];
     [setupProgressBar setAlpha:0];
-    [alert show];
     
     if(!reloadBtn) {
         reloadBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height-80, self.view.frame.size.width-(20*2), 50)];

@@ -18,10 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 	self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
 	self.window.rootViewController = self.viewController;
-	[self.viewController setTitle:[NSString stringWithFormat:@"Grid %@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]];
 	[self.window makeKeyAndVisible];
 	
 	return YES;
